@@ -11,10 +11,6 @@
 (($)->
   _n = @
 
-  # tabs_old {{{
-  tabs_old = `(function(a){ return function(r,g){var n={current:0,type:"click",content:".tabContent",duration:300,active:"active",effect:"defaultE",pause:6000,nav:false,width:470,height:150,single:0,easing:"swing",move:1,overlap:0};var C=a.extend(n,r);if(!jQuery.easing.def){C.easing="swing"}var p=("string"===typeof C.content)?a(C.content):C.content;var d=p.length;var h=p.parent();var m=C.height;var u=C.width;var D=C.single;var v=C.effect;if(D>0){var c=D-C.move+1;var e="";for(var z=0;z<d;z++){if(d<=D||(D>1&&(d-z<c))){e+='<li class="hidden"></li>'}else{e+="<li></li>"}}var o=a("<ul class='tabCon'>"+e+"</ul>");var k=o.children();h.after(o)}else{var k=a(this);var o=k.parent()}var y=0;var w;var A;var j=0;var l=0;var q=(function(){var i=C.type;if(i=="hover"){i="mouseover"}if(i=="auto"){i="click"}return i})();function x(){k.eq(C.current).addClass(C.active);if(D>1){k.eq(C.current).addClass("sibl").nextUntil(k.eq(C.current+c)).addClass("sibl")}if(C.nav){b()}if(v){s()}if(v!="slide"&&v!="slideV"){p.not(":eq("+C.current+")").hide()}else{if(D&&v=="slideV"){h.parent().css({overflow:"hidden",height:m*D+"px"})}else{h.parent().css({overflow:"hidden",height:m+"px",width:(u+C.overlap*2)+"px"})}}if(v=="slide"){if(D){p.css({width:Math.floor(u/D)+"px","float":"left"});h.css({width:Math.floor(u/D)*d+"px"})}else{p.css({width:u+"px","float":"left"});h.css({width:u*d+"px"})}}if(v=="slideV"){p.css({height:m+"px"})}if(v=="fade"||v=="fadeM"){p.css({position:"absolute",left:"0",top:"0"})}if(g){g.call(k,p,C)}if(d<=1||D>=d){return}if(C.type=="auto"){f();t()}k.bind(q,B)}function t(){h.hover(function(i){clearInterval(w)},function(){f()});o.hover(function(i){clearInterval(w)},function(){f()})}function s(){h.wrap("<div class='tabContent'></div>");A=(D>0)?a(this).parent():a(this).parent().find(".tabContent");A.bind("mouseover",function(i){if(!i.fromElement){clearInterval(w)}})}function b(){var F=h.parent().css("position","relative");if(document.body.id=="apk-detail-page"){var E=a("<a href='javascript:;' class='prev' style='display:block'></a>").appendTo(F);var i=a("<a href='javascript:;' class='next' style='display:block'></a>").appendTo(F)}else{var E=a("<a href='javascript:;' class='prev' style='display:none'></a>").appendTo(F);var i=a("<a href='javascript:;' class='next' style='display:none'></a>").appendTo(F)};if(document.body.id=="apk-detail-page"){F.hover(function(){E.show();i.show()},function(){E.show();i.show()})}else{F.hover(function(){E.show();i.show()},function(){E.hide();i.hide()});};E.click(function(){if(D&&j==0){j=d-D+1}l=-1;k.eq(j-1).trigger(q)});i.click(function(){if(D&&j>=d-D){j=-1}l=1;k.eq(j+1-d).trigger(q)});if(C.type=="auto"){E.hover(function(){clearInterval(w)},function(){f()});i.hover(function(){clearInterval(w)},function(){f()})}}function f(){w=setInterval(function(){if(v=="slideC"){nextBtn.trigger("click");return}y=j+1;if(D&&v=="slide"&&y==Math.floor(d/C.move)+d%C.move-(D-C.move)){y=0}else{if(D&&v=="slideV"&&y==Math.floor(d/C.move)+d%C.move-(D-C.move)){y=0}else{if(y==d){y=0}}}k.eq(y).trigger("click");y++},C.pause)}function B(E){E.stopPropagation();var i=a(this);j=i.index();k.removeClass(C.active);i.addClass(C.active);if(D>1){k.removeClass("sibl");i.addClass("sibl").nextUntil(k.eq(j+c)).addClass("sibl")}C.efts[v]()}C.efts={slideC:function(){if(y==j){return}p.stop(true,true);h.css({overflow:"hidden",width:u+"px",position:"relative",height:m+"px"});p.css({"z-index":"-1",left:"0",position:"absolute",top:"0",display:"block"});var E=function(){p.eq(y).css({"z-index":"0",left:"0"}).animate({left:-u+"px"},C.duration,C.easing);p.eq(j).css({"z-index":"0",left:u+"px"}).animate({left:"0"},C.duration,C.easing)};var i=function(){p.eq(y).css({"z-index":"0",left:"0"}).animate({left:u+"px"},C.duration,C.easing);p.eq(j).css({"z-index":"0",left:-u+"px"}).animate({left:"0"},C.duration,C.easing)};if(l==1){E();l=0}else{if(l==-1){i();l=0}else{if(j>y){E()}else{i()}}}y=j},slideV:function(){h.stop();if(D){h.animate({marginTop:"-"+m*(j*C.move)+"px"},C.duration,C.easing)}else{h.animate({marginTop:"-"+m*j+"px"},C.duration,C.easing)}},fade:function(){p.stop(true,true).css("display","none").eq(j).fadeIn(C.duration,C.easing)},fadeM:function(){p.stop(true,true).fadeOut(C.duration).eq(j).fadeIn(C.duration,C.easing)},slide:function(){h.stop();if(D){h.animate({marginLeft:C.overlap-Math.floor(u*(j/D))*C.move+"px"},C.duration,C.easing)}else{h.animate({marginLeft:C.overlap-(u*j)+"px"},C.duration,C.easing)}},defaultE:function(){p.not(":eq("+j+")").css("display","none");p.eq(j).css("display","block")}};x();return this}})(jQuery)`
-  # }}}
-
   # tabs_new {{{
   tabs_new = (($)->
 
@@ -252,13 +248,14 @@
               tomargin = loopstart + current * if config.effect is 'slideV' then config.height else config.width
 
             # 已溢出或边缘情况
-            else if overflow < 0
+            else if overflow <= 0
               # 开启循环，允许边缘或溢出
               if config.loop
-                current += count
-                tomargin = loopstart + current * if config.effect is 'slideV' then config.height else config.width
-                $content.css animateName, tomargin
-                callback('reset', current) if callback
+                if overflow < 0
+                  current += count
+                  tomargin = loopstart + current * if config.effect is 'slideV' then config.height else config.width
+                  $content.css animateName, tomargin
+                  callback('reset', current) if callback
               # 未开启循环，直接重置
               else
                 current = 1
@@ -459,9 +456,6 @@
   )(jQuery)
   # }}}
 
-  # back for old
-  #jQuery.fn.tabs_old = tabs_old
-  _n.nEffect.setEffect 'tabs', tabs_old, 'jQuery', 1
   _n.nEffect.setEffect 'tabs', tabs_new, 'jQuery', 10
 
   undefined

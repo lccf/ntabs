@@ -1,0 +1,10 @@
+{
+  "coffee": {
+    "command":[
+      "coffee -bp #{$fileName}.coffee>../example/js/#{$fileName}.js"
+       /* , "cp -fp ../js/#{$fileName}.js ../../public/js" */
+    ]
+  }
+}
+/* vim:ft=javascript ts=2 sts=2 sw=2 et
+*/

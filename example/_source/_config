@@ -1,0 +1,30 @@
+{
+  "jade/": {
+    "path": "~",
+    "jade": {
+      "command": [
+        "jade -PO ../ jade/#{$fileName}.jade"
+      ]
+    }
+  },
+  "sass/": {
+    "path": "~",
+    "sass": {
+      "command": [
+        "sass --style compact sass/#{$fileName}.sass ../css/#{$fileName}.css"
+         /* , "cp -fp ../css/#{$fileName}.css ../../public/css" */
+      ]
+    }
+  },
+  "coffee/": {
+    "path": "~",
+    "coffee": {
+      "command":[
+        "coffee -bp coffee/#{$fileName}.coffee>../js/#{$fileName}.js"
+         /* , "cp -fp ../js/#{$fileName}.js ../../public/js" */
+      ]
+    }
+  }
+}
+/* vim:ft=javascript ts=2 sts=2 sw=2 et
+*/
