@@ -5,7 +5,7 @@
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
 "    Version: ndoo.js(v0.3.2beta)
-" LastChange: 04/18/2013 15:05
+" LastChange: 05/07/2013 15:04
 " --------------------------------------------------
 */
 (function($) {
@@ -177,7 +177,7 @@
         return void 0;
       };
       initState = function() {
-        var $elem, text, url;
+        var $elem, target, text, url;
 
         if (config.effect === 'slideV') {
           $content.css({
@@ -199,7 +199,8 @@
           $elem = $content.find("li:eq(" + (beforeoffset - config.current) + ")");
           text = $elem.data('labelText');
           url = $elem.data('labelUrl');
-          setLabel(text, url);
+          target = $elem.data('labelTarget');
+          setLabel(text, url, target);
         }
         return void 0;
       };
@@ -215,11 +216,11 @@
         }
         return true;
       };
-      setLabel = function(text, url) {
+      setLabel = function(text, url, target) {
         var $label;
 
         $label = $self.find('.tabLabel');
-        $label.html("<a href='" + (url || 'javascript:;') + "'>" + text + "</a>");
+        $label.html("<a href='" + (url || 'javascript:;') + "' target='" + (target || '') + "'>" + text + "</a>");
         return void 0;
       };
       effect = {

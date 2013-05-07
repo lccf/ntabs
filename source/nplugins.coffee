@@ -5,7 +5,7 @@
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
 "    Version: ndoo.js(v0.3.2beta)
-" LastChange: 04/18/2013 15:05
+" LastChange: 05/07/2013 15:04
 " --------------------------------------------------
 ###
 (($)->
@@ -201,7 +201,8 @@
           $elem = $content.find "li:eq(#{beforeoffset - config.current})"
           text = $elem.data 'labelText'
           url = $elem.data 'labelUrl'
-          setLabel text, url
+          target = $elem.data 'labelTarget'
+          setLabel text, url, target
 
         undefined
       # }}}
@@ -219,9 +220,9 @@
       # }}}
 
       # setTitle 设置title {{{
-      setLabel = (text, url)->
+      setLabel = (text, url, target)->
         $label = $self.find '.tabLabel'
-        $label.html "<a href='#{url or 'javascript:;'}'>#{text}</a>"
+        $label.html "<a href='#{url or 'javascript:;'}' target='#{target or ''}'>#{text}</a>"
         undefined
       # }}}
 
