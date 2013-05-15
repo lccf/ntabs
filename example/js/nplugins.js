@@ -35,7 +35,8 @@
         tabCon: false,
         tabConCtl: true,
         reverse: false,
-        label: false
+        label: false,
+        ctrl: false
       };
       config = $.extend(config, option);
       $self = this;
@@ -438,9 +439,13 @@
           callback('init');
         }
         run('start');
+        if (config.ctrl) {
+          self.ctrl = run;
+        }
         return void 0;
       };
-      return init();
+      init();
+      return self;
     };
   })(jQuery);
   _n.nEffect.setEffect('tabs', tabs_new, 'jQuery', 10);

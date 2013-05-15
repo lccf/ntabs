@@ -35,6 +35,7 @@
         tabConCtl : true          # 启用con控制
         reverse   : false         # 是否反转运动方向
         label     : false         # 是否显示标题
+        ctrl      : false         # 是否返回控制函数
 
       config    = $.extend config, option
 
@@ -449,10 +450,15 @@
 
         run 'start'
 
+        if config.ctrl
+          self.ctrl = run
+
         undefined
 
       # 入口
       init()
+
+      self
 
   )(jQuery)
   # }}}
