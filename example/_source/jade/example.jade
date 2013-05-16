@@ -1,33 +1,197 @@
 extends _layout
 
 block append pageTitle
-  title 测试页面
+  title ntabs example
   link(media="all",rel="stylesheet",type="text/css",href="css/style.css")
 
 block pageContent
   .wrap
+    // example1 {{{
+    h3 example1
+    p code:
+    pre.code_example
+      |(function() {
+      |  var $verticalTab;
+
+      |  $verticalTab = $('#verticalTab');
+      |  if ($verticalTab.length) {
+      |    $verticalTab.tabs({
+      |      current: 0,
+      |      type: "click",
+      |      content: ".tab_body",
+      |      duration: 400,
+      |      active: "active",
+      |      effect: "slideH",
+      |      pause: 4000,
+      |      nav: true,
+      |      width: 220,
+      |      height: 365,
+      |      single: 2,
+      |      easing: "swing",
+      |      move: 1,
+      |      loop: true,
+      |      offset: [0, 130, 0, 130],
+      |      tabCon: true,
+      |      tabConCtl: true,
+      |      reverse: false,
+      |      label: false
+      |    }, 10);
+      |  }
+      |  return void 0;
+      |})();
+    p 效果:
+    div.example_box
+      #verticalTab.Cslides.verticalTab
+        ul.tab_body
+          li: a(href="#"): img(src="pic2/0.watermark.jpg")
+          li: a(href="#"): img(src="pic2/1.watermark.jpg")
+          li: a(href="#"): img(src="pic2/2.watermark.jpg")
+          li: a(href="#"): img(src="pic2/3.watermark.jpg")
+    // }}}
+
+    // example2 {{{
     .Lmt40 &nbsp;
-    #verticalTab.Cslides.verticalTab
-      ul.tab_body
-        li: a(href="#"): img(src="pic2/0.watermark.jpg")
-        li: a(href="#"): img(src="pic2/1.watermark.jpg")
-        li: a(href="#"): img(src="pic2/2.watermark.jpg")
-        li: a(href="#"): img(src="pic2/3.watermark.jpg")
+    h3 example2
+    p code:
+    pre.code_example
+      |(function() {
+      |  var $horizontalTab;
+
+      |  $horizontalTab = $('#horizontalTab');
+      |  if ($horizontalTab.length) {
+      |    $horizontalTab.tabs({
+      |      current: 0,
+      |      type: "click",
+      |      content: ".tab_body",
+      |      duration: 400,
+      |      active: "active",
+      |      effect: "slideH",
+      |      pause: 4000,
+      |      nav: true,
+      |      width: 440,
+      |      height: 262,
+      |      single: 1,
+      |      easing: "swing",
+      |      move: 1,
+      |      loop: true,
+      |      offset: [0, 130, 0, 130],
+      |      tabCon: true,
+      |      tabConCtl: true,
+      |      reverse: false,
+      |      label: false
+      |    }, 10);
+      |  }
+      |  return void 0;
+      |})();
+      
+    p 效果:
+    .example_box
+      #horizontalTab.Cslides.horizontalTab
+        ul.tab_body
+          li: a(href="#"): img(src="pic/0.watermark.jpg")
+          li: a(href="#"): img(src="pic/1.watermark.jpg")
+          li: a(href="#"): img(src="pic/2.watermark.jpg")
+          li: a(href="#"): img(src="pic/3.watermark.jpg")
+          li: a(href="#"): img(src="pic/4.watermark.jpg")
+    // }}}
+
+    // example3 {{{
     .Lmt40 &nbsp;
-    #horizontalTab.Cslides.horizontalTab
-      ul.tab_body
-        li: a(href="#"): img(src="pic/0.watermark.jpg")
-        li: a(href="#"): img(src="pic/1.watermark.jpg")
-        li: a(href="#"): img(src="pic/2.watermark.jpg")
-        li: a(href="#"): img(src="pic/3.watermark.jpg")
-        li: a(href="#"): img(src="pic/4.watermark.jpg")
+    h3 example3
+    p code:
+    pre.code_example
+      |(function() {
+      |  var $verticalTab;
+
+      |  $verticalTab = $('#verticalTab2');
+      |  if ($verticalTab.length) {
+      |    $verticalTab.tabs({
+      |      current: 0,
+      |      type: "click",
+      |      content: ".tab_body",
+      |      duration: 400,
+      |      active: "active",
+      |      effect: "slideH",
+      |      pause: 4000,
+      |      nav: true,
+      |      width: 220,
+      |      height: 365,
+      |      single: 2,
+      |      easing: "swing",
+      |      move: 1,
+      |      loop: false,
+      |      offset: [0, 130, 0, 0],
+      |      tabCon: true,
+      |      tabConCtl: true,
+      |      reverse: false,
+      |      label: false
+      |    }, 10);
+      |  }
+      |  return void 0;
+      |})();
+      
+    p 效果:
+    .example_box
+      #verticalTab2.Cslides.verticalTab.verticalTab2
+        ul.tab_body
+          li: a(href="#"): img(src="pic2/0.watermark.jpg")
+          li: a(href="#"): img(src="pic2/1.watermark.jpg")
+          li: a(href="#"): img(src="pic2/2.watermark.jpg")
+          li: a(href="#"): img(src="pic2/3.watermark.jpg")
+    // }}}
+
+    // example4 {{{
     .Lmt40 &nbsp;
-    #verticalTab2.Cslides.verticalTab.verticalTab2
-      ul.tab_body
-        li: a(href="#"): img(src="pic2/0.watermark.jpg")
-        li: a(href="#"): img(src="pic2/1.watermark.jpg")
-        li: a(href="#"): img(src="pic2/2.watermark.jpg")
-        li: a(href="#"): img(src="pic2/3.watermark.jpg")
+    h3 example4
+    p code:
+    pre.code_example
+      |(function() {
+      |  var $horizontalTab;
+
+      |  $horizontalTab = $('#horizontalTab2');
+      |  if ($horizontalTab.length) {
+      |    window.horizontalTab2 = $horizontalTab.tabs({
+      |      current: 0,
+      |      type: "auto",
+      |      content: ".tab_body",
+      |      duration: 400,
+      |      active: "active",
+      |      effect: "slideH",
+      |      pause: 4000,
+      |      nav: true,
+      |      width: 440,
+      |      height: 262,
+      |      single: 1,
+      |      easing: "swing",
+      |      move: 1,
+      |      loop: true,
+      |      offset: [0, 130, 0, 130],
+      |      tabCon: true,
+      |      tabConCtl: true,
+      |      reverse: false,
+      |      label: false,
+      |      ctrl: true
+      |    }, 10);
+      |  }
+      |  return void 0;
+      |})();
+      | 停止: horizontalTab2.ctrl('stop')
+      | 开始: horizontalTab2.ctrl('start')
+      
+    p 效果:
+    .example_box
+      #horizontalTab2.Cslides.horizontalTab
+        ul.tab_body
+          li: a(href="#"): img(src="pic/0.watermark.jpg")
+          li: a(href="#"): img(src="pic/1.watermark.jpg")
+          li: a(href="#"): img(src="pic/2.watermark.jpg")
+          li: a(href="#"): img(src="pic/3.watermark.jpg")
+          li: a(href="#"): img(src="pic/4.watermark.jpg")
+      div.Lmt20.Ltac
+        button(onclick="horizontalTab2.ctrl('stop')") 停止
+        button(onclick="horizontalTab2.ctrl('start')") 运行
+    // }}}
+
     .Lmt40 &nbsp;
 
 block pageScriptArea

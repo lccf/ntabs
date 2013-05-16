@@ -5,7 +5,7 @@
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
 "    Version: ndoo.js(v0.3.2beta)
-" LastChange: 05/07/2013 15:04
+" LastChange: 05/16/2013 20:01
 " --------------------------------------------------
 ###
 (($)->
@@ -38,11 +38,13 @@
         ctrl      : false         # 是否返回控制函数
 
       config    = $.extend config, option
+      config.current = 0 - config.current if config.current > 0
 
       $self     = @
       $content  = $self.find config.content
 
       tick      = -1 #计时器变量
+      ctrllock  = false #操作锁
       count     = $content.find('>li').length
       loopstart = 0
       beforeoffset = 0
@@ -186,11 +188,11 @@
         if config.effect == 'slideV'
           $content.css
             'height': config.height * ($content.find('li').length + 2)
-            'marginTop': loopstart
+            'marginTop': loopstart + config.height * config.current
         else if config.effect == 'slideH'
           $content.css
             'width': config.width * ($content.find('li').length + 2)
-            'marginLeft': loopstart
+            'marginLeft': loopstart + config.width * config.current
         else if config.effect == 'fade' or config.effect == 'fadeM'
           $content.find('li').eq(config.current).siblings().hide()
 
@@ -424,7 +426,7 @@
           else
             clearInterval tick
           tick = -1
-        if type is 'start' and (config.type is 'auto' or config.type is 'autoclick')
+        if type is 'start' and not ctrllock and (config.type is 'auto' or config.type is 'autoclick')
           if config.debug
             clearTimeout tick
             tick = setTimeout step, config.pause
@@ -433,6 +435,15 @@
             tick = setInterval step, config.pause
 
         undefined
+
+      ctrl = (type)->
+        if type is 'stop' and tick isnt -1
+          ctrllock = true
+          run type
+
+        if  type is 'start' and tick is -1
+          ctrllock = false
+          run type
 
       # 初始化
       init = ->
@@ -451,14 +462,14 @@
         run 'start'
 
         if config.ctrl
-          self.ctrl = run
+          $self.ctrl = ctrl
 
         undefined
 
       # 入口
       init()
 
-      self
+      $self
 
   )(jQuery)
   # }}}

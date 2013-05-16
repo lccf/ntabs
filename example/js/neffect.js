@@ -5,7 +5,7 @@
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
 "    Version: ndoo.js(v0.3.2beta)
-" LastChange: 03/22/2013 11:56
+" LastChange: 05/16/2013 20:01
 " --------------------------------------------------
 */
 (function($) {
@@ -24,8 +24,7 @@
           version = callback;
           callback = void 0;
         }
-        _n.nEffect.getEffect(name, version).call(this, option, callback);
-        return void 0;
+        return _n.nEffect.getEffect(name, version).call(this, option, callback);
       };
       fn.isNEF = true;
       return fn;

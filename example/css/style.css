@@ -15,7 +15,17 @@ i { font-style: normal; }
 
 img { display: block; }
 
-body { background-color: #f7f7f7; }
+body { font-size: 12px; line-height: 1.5em; background-color: #f7f7f7; font-family: \5FAE\8F6F\96C5\9ED1, \5B8B\4F53; }
+
+.Lmt40 { margin-top: 40px; }
+
+.Lmt20 { margin-top: 20px; }
+
+.Ltac { text-align: center; }
+
+.code_example { padding: 10px; margin-top: 0; border: 1px solid #dddddd; background-color: white; color: blue; }
+
+.example_box { padding: 40px; border: 1px solid #dddddd; background-color: white; }
 
 .wrap { width: 960px; margin-left: auto; margin-right: auto; }
 

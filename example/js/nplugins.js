@@ -5,7 +5,7 @@
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
 "    Version: ndoo.js(v0.3.2beta)
-" LastChange: 05/07/2013 15:04
+" LastChange: 05/16/2013 20:01
 " --------------------------------------------------
 */
 (function($) {
@@ -14,7 +14,7 @@
   _n = this;
   tabs_new = (function($) {
     return function(option, callback) {
-      var $content, $self, beforeoffset, config, count, effect, init, initLabel, initNav, initState, initTabCon, initTabContent, loopstart, run, setLabel, setTabCon, step, tick;
+      var $content, $self, beforeoffset, config, count, ctrl, ctrllock, effect, init, initLabel, initNav, initState, initTabCon, initTabContent, loopstart, run, setLabel, setTabCon, step, tick;
 
       config = {
         current: 0,
@@ -39,9 +39,13 @@
         ctrl: false
       };
       config = $.extend(config, option);
+      if (config.current > 0) {
+        config.current = 0 - config.current;
+      }
       $self = this;
       $content = $self.find(config.content);
       tick = -1;
+      ctrllock = false;
       count = $content.find('>li').length;
       loopstart = 0;
       beforeoffset = 0;
@@ -183,12 +187,12 @@
         if (config.effect === 'slideV') {
           $content.css({
             'height': config.height * ($content.find('li').length + 2),
-            'marginTop': loopstart
+            'marginTop': loopstart + config.height * config.current
           });
         } else if (config.effect === 'slideH') {
           $content.css({
             'width': config.width * ($content.find('li').length + 2),
-            'marginLeft': loopstart
+            'marginLeft': loopstart + config.width * config.current
           });
         } else if (config.effect === 'fade' || config.effect === 'fadeM') {
           $content.find('li').eq(config.current).siblings().hide();
@@ -415,7 +419,7 @@
           }
           tick = -1;
         }
-        if (type === 'start' && (config.type === 'auto' || config.type === 'autoclick')) {
+        if (type === 'start' && !ctrllock && (config.type === 'auto' || config.type === 'autoclick')) {
           if (config.debug) {
             clearTimeout(tick);
             tick = setTimeout(step, config.pause);
@@ -425,6 +429,16 @@
           }
         }
         return void 0;
+      };
+      ctrl = function(type) {
+        if (type === 'stop' && tick !== -1) {
+          ctrllock = true;
+          run(type);
+        }
+        if (type === 'start' && tick === -1) {
+          ctrllock = false;
+          return run(type);
+        }
       };
       init = function() {
         if (!$self.length) {
@@ -440,12 +454,12 @@
         }
         run('start');
         if (config.ctrl) {
-          self.ctrl = run;
+          $self.ctrl = ctrl;
         }
         return void 0;
       };
       init();
-      return self;
+      return $self;
     };
   })(jQuery);
   _n.nEffect.setEffect('tabs', tabs_new, 'jQuery', 10);
