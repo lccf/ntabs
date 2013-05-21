@@ -118,3 +118,34 @@
   }
   return void 0;
 })();
+
+(function() {
+  var $horizontalFade;
+
+  $horizontalFade = $('#horizontalFade');
+  if ($horizontalFade.length) {
+    $horizontalFade.tabs({
+      current: 0,
+      type: "auto",
+      content: ".tab_body",
+      duration: 600,
+      active: "active",
+      effect: "fadeM",
+      pause: 4000,
+      nav: false,
+      width: 495,
+      height: 297,
+      single: 1,
+      easing: "swing",
+      move: 1,
+      loop: false,
+      offset: [0, 0, 0, 0],
+      tabCon: true,
+      tabConCtl: true,
+      reverse: false,
+      label: false,
+      ctrl: true
+    }, 10);
+  }
+  return void 0;
+})();

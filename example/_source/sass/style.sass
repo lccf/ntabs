@@ -50,15 +50,6 @@ body
 .Cslides
   overflow: hidden
   position: relative
-  &.fade
-    .tab_body
-      position: relative
-      li
-        position: absolute
-        left: 0
-        top: 0
-    .tabCon
-      z-index: 5
   .tab_body
     width: 9999px
     li
@@ -145,3 +136,39 @@ body
 
 .verticalTab2
   width: 570px
+
+.horizontalFade
+  .tab_body
+    position: relative
+    left: 100px
+    li
+      position: absolute
+      left: 0
+      top: 0
+    img
+      height: 293px
+      width: 491px
+      border: 2px solid #DDD
+
+  .tabCon
+    height: auto
+    text-align: left
+    background-color: transparent
+    position: absolute
+    left: 0
+    top: 0
+    z-index: 5
+    padding-top: 2px
+    li
+      display: block
+      float: none
+      margin-top: -2px
+      margin-right: 0
+      width: 96px
+      height: auto
+      border: 2px solid #DDD
+    img
+      width: 96px
+    .active
+      z-index: 2
+      border-color: #F60

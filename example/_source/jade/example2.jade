@@ -1,0 +1,68 @@
+extends _layout
+
+block append pageTitle
+  title ntabs example2
+  link(media="all",rel="stylesheet",type="text/css",href="css/style.css")
+
+block pageContent
+  .wrap
+    // example1 {{{
+    .Lmt40 &nbsp;
+    h3 fade
+    p code:
+    pre.code_example
+      |(function() {
+      |  var $horizontalTab;
+
+      |  $horizontalTab = $('#horizontalTab');
+      |  if ($horizontalTab.length) {
+      |    $horizontalTab.tabs({
+      |      current: 0,
+      |      type: "click",
+      |      content: ".tab_body",
+      |      duration: 400,
+      |      active: "active",
+      |      effect: "slideH",
+      |      pause: 4000,
+      |      nav: true,
+      |      width: 440,
+      |      height: 262,
+      |      single: 1,
+      |      easing: "swing",
+      |      move: 1,
+      |      loop: true,
+      |      offset: [0, 130, 0, 130],
+      |      tabCon: true,
+      |      tabConCtl: true,
+      |      reverse: false,
+      |      label: false
+      |    }, 10);
+      |  }
+      |  return void 0;
+      |})();
+      
+    p 效果:
+    .example_box
+      #horizontalFade.Cslides.horizontalFade
+        ul.tab_body
+          li: a(href="#"): img(src="pic/0.watermark.jpg")
+          li: a(href="#"): img(src="pic/1.watermark.jpg")
+          li: a(href="#"): img(src="pic/2.watermark.jpg")
+          li: a(href="#"): img(src="pic/3.watermark.jpg")
+          li: a(href="#"): img(src="pic/4.watermark.jpg")
+        ul.tabCon
+          li: a(href="#"): img(src="pic/0.watermark.jpg")
+          li: a(href="#"): img(src="pic/1.watermark.jpg")
+          li: a(href="#"): img(src="pic/2.watermark.jpg")
+          li: a(href="#"): img(src="pic/3.watermark.jpg")
+          li: a(href="#"): img(src="pic/4.watermark.jpg")
+    // }}}
+
+    .Lmt40 &nbsp;
+
+block pageScriptArea
+  div#scriptArea.Ldn(data-page-id="test_abc")
+    script(src="js/jquery-1.9.1.min.js")
+    script(src="js/neffect.js")
+    script(src="js/nplugins.js")
+    script(src="js/example.js")

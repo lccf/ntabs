@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ntabs example2</title>
+    <link media="all" rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- example1 {{{-->
+      <div class="Lmt40">&nbsp;</div>
+      <h3>fade</h3>
+      <p>code:</p>
+      <pre class="code_example">(function() {
+ var $horizontalTab;
+ $horizontalTab = $('#horizontalTab');
+ if ($horizontalTab.length) {
+   $horizontalTab.tabs({
+     current: 0,
+     type: &quot;click&quot;,
+     content: &quot;.tab_body&quot;,
+     duration: 400,
+     active: &quot;active&quot;,
+     effect: &quot;slideH&quot;,
+     pause: 4000,
+     nav: true,
+     width: 440,
+     height: 262,
+     single: 1,
+     easing: &quot;swing&quot;,
+     move: 1,
+     loop: true,
+     offset: [0, 130, 0, 130],
+     tabCon: true,
+     tabConCtl: true,
+     reverse: false,
+     label: false
+   }, 10);
+ }
+ return void 0;
+})();</pre>
+      <p>效果:</p>
+      <div class="example_box">
+        <div id="horizontalFade" class="Cslides horizontalFade">
+          <ul class="tab_body">
+            <li><a href="#"><img src="pic/0.watermark.jpg"></a></li>
+            <li><a href="#"><img src="pic/1.watermark.jpg"></a></li>
+            <li><a href="#"><img src="pic/2.watermark.jpg"></a></li>
+            <li><a href="#"><img src="pic/3.watermark.jpg"></a></li>
+            <li><a href="#"><img src="pic/4.watermark.jpg"></a></li>
+          </ul>
+          <ul class="tabCon">
+            <li><a href="#"><img src="pic/0.watermark.jpg"></a></li>
+            <li><a href="#"><img src="pic/1.watermark.jpg"></a></li>
+            <li><a href="#"><img src="pic/2.watermark.jpg"></a></li>
+            <li><a href="#"><img src="pic/3.watermark.jpg"></a></li>
+            <li><a href="#"><img src="pic/4.watermark.jpg"></a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- }}}-->
+      <div class="Lmt40">&nbsp;</div>
+    </div>
+    <div id="scriptArea" data-page-id="test_abc" class="Ldn">
+      <script src="js/jquery-1.9.1.min.js"></script>
+      <script src="js/neffect.js"></script>
+      <script src="js/nplugins.js"></script>
+      <script src="js/example.js"></script>
+    </div>
+  </body>
+</html>
