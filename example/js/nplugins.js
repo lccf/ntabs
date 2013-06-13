@@ -148,7 +148,7 @@
         tabContent = "<div class='tabContent' style='width:" + width + "px; height:" + height + "px;'></div>";
         beforeOffset = offset[3] || offset[0];
         if (beforeOffset) {
-          beforeRepeat = count - Math.ceil(beforeOffset / config.width) - 1;
+          beforeRepeat = count - Math.ceil(beforeOffset / config.width) - config.single;
           $beforeEl = $content.find("li:gt(" + beforeRepeat + ")").clone();
           loopstart = beforeOffset - $beforeEl.length * (config.effect === 'slideV' ? config.height : config.width);
           beforeoffset = $beforeEl.length;
@@ -158,7 +158,7 @@
         }
         afterOffset = offset[1] || offset[2];
         if (afterOffset) {
-          afterRepeat = Math.ceil(afterOffset / config.width) + count % config.move + 1;
+          afterRepeat = Math.ceil(afterOffset / config.width) + count % config.move + config.single;
           $afterEl = $self.find("li:lt(" + afterRepeat + ")").clone();
         } else if (!beforeOffset && config.loop) {
           $afterEl = $self.find("li:lt(1)").clone();

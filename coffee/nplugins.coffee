@@ -4,8 +4,8 @@
 "       Desc: 插件实现
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
-"    Version: ndoo.js(v0.3.2beta)
-" LastChange: 05/16/2013 20:01
+"    Version: ndoo.js(v0.3.3beta)
+" LastChange: 06/13/2013 13:41
 " --------------------------------------------------
 ###
 (($)->
@@ -142,7 +142,7 @@
         beforeOffset = offset[3] || offset[0]
         # 循环情况下的强制重复
         if beforeOffset
-          beforeRepeat = count - Math.ceil(beforeOffset / config.width) - 1
+          beforeRepeat = count - Math.ceil(beforeOffset / config.width) - config.single
           $beforeEl = $content.find("li:gt(#{beforeRepeat})").clone()
           loopstart = beforeOffset - $beforeEl.length * if config.effect is 'slideV' then config.height else config.width
           # 暂存前缀
@@ -154,7 +154,7 @@
         # 后重复
         afterOffset = offset[1] || offset[2]
         if afterOffset
-          afterRepeat = Math.ceil(afterOffset / config.width) + count % config.move + 1
+          afterRepeat = Math.ceil(afterOffset / config.width) + count % config.move + config.single
           $afterEl = $self.find("li:lt(#{afterRepeat})").clone()
         else if not beforeOffset and config.loop
           $afterEl = $self.find("li:lt(1)").clone()
