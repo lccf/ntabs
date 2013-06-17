@@ -258,6 +258,7 @@
                 if overflow < 0
                   current += count
                   tomargin = loopstart + current * if config.effect is 'slideV' then config.height else config.width
+                  # console.log "reset!!! animateName: #{animateName} tomargin: #{tomargin}"
                   $content.css animateName, tomargin
                   callback('reset', current) if callback
               # 未开启循环，直接重置
@@ -292,6 +293,7 @@
                 current -= count
                 tomargin = loopstart + current * if config.effect is 'slideV' then config.height else config.width
                 $content.css animateName, tomargin
+                # console.log "reset!!! animateName: #{animateName} tomargin: #{tomargin}"
                 callback('reset', current) if callback
 
                 current += config.move
@@ -306,7 +308,7 @@
           config.current = current
           animate[animateName] = tomargin
           # 应用动画
-          $content.stop(true, true)
+          $content.stop(true)
           .animate animate
           , config.duration
           , config.easing

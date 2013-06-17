@@ -4,8 +4,8 @@
 "       Desc: 插件实现
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
-"    Version: ndoo.js(v0.3.2beta)
-" LastChange: 05/16/2013 20:01
+"    Version: ndoo.js(v0.3.3beta)
+" LastChange: 06/13/2013 13:41
 " --------------------------------------------------
 */
 (function($) {
@@ -291,7 +291,7 @@
           }
           config.current = current;
           animate[animateName] = tomargin;
-          $content.stop(true, true).animate(animate, config.duration, config.easing, function() {
+          $content.stop(true).animate(animate, config.duration, config.easing, function() {
             if (callback) {
               callback('effectover', current);
             }
