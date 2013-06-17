@@ -53,10 +53,6 @@
       tabConCtl: true,
       reverse: false,
       label: false
-    }, function(type, params) {
-      if (type === 'effectover') {
-        console.log("effectover!!! current: " + params);
-      }
     }, 10);
   }
   return void 0;

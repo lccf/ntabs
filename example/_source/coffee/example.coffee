@@ -48,10 +48,10 @@
       tabConCtl : true             # 启用con控制
       reverse   : false            # 是否反转运动方向
       label     : false            # 是否显示标题
-    , (type, params)->
-      if type is 'effectover'
-        console.log "effectover!!! current: #{params}"
-      return;
+    # , (type, params)->
+    #   if type is 'effectover'
+    #     console.log "effectover!!! current: #{params}"
+    #   return;
     , 10
 
   undefined

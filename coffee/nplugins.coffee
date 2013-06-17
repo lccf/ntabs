@@ -342,9 +342,9 @@
           config.current = current
 
           if e is 'default'
-            $content.find('li').stop(true, true).hide()
+            $content.find('li').stop(true).hide()
           else if e is 'out'
-            $content.find('li').stop(true, true).css('z-index', 1)
+            $content.find('li').stop(true).css('z-index', 1)
             .eq(beforeoffset - prev).css('z-index',2).end().eq(beforeoffset - current).hide().css('z-index', 3)
             #$content.find('li').stop(true, true).css('z-index', 1).eq(beforeoffset - config.current).hide().css('z-index',2)
 
