@@ -5,7 +5,7 @@
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
 "    Version: ndoo.js(v0.3.3beta)
-" LastChange: 06/13/2013 13:41
+" LastChange: 06/25/2013 17:21
 " --------------------------------------------------
 */
 (function($) {
@@ -115,7 +115,7 @@
                 run('start');
                 return void 0;
               }).find('li').bind('mouseenter', function() {
-                step('set', false, $(this).index());
+                step('set', true, $(this).index());
                 return void 0;
               });
             } else if (config.type === 'click') {
@@ -248,7 +248,7 @@
                 if (overflow < 0) {
                   current += count;
                   tomargin = loopstart + current * (config.effect === 'slideV' ? config.height : config.width);
-                  $content.css(animateName, tomargin);
+                  $content.stop(true).css(animateName, tomargin);
                   if (callback) {
                     callback('reset', current);
                   }
@@ -276,7 +276,7 @@
               if (config.loop) {
                 current -= count;
                 tomargin = loopstart + current * (config.effect === 'slideV' ? config.height : config.width);
-                $content.css(animateName, tomargin);
+                $content.stop(true).css(animateName, tomargin);
                 if (callback) {
                   callback('reset', current);
                 }
@@ -327,9 +327,9 @@
           }
           config.current = current;
           if (e === 'default') {
-            $content.find('li').stop(true, true).hide();
+            $content.find('li').stop(true).hide();
           } else if (e === 'out') {
-            $content.find('li').stop(true, true).css('z-index', 1).eq(beforeoffset - prev).css('z-index', 2).end().eq(beforeoffset - current).hide().css('z-index', 3);
+            $content.find('li').stop(true).css('z-index', 1).eq(beforeoffset - prev).css('z-index', 2).end().eq(beforeoffset - current).hide().css('z-index', 3);
           }
           if (useEffect) {
             $content.find("li:eq(" + (beforeoffset - config.current) + ")").fadeIn(config.duration, config.easing, function() {

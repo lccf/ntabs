@@ -4,8 +4,8 @@
 "       Desc: 插件实现
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
-"    Version: ndoo.js(v0.3.2beta)
-" LastChange: 05/16/2013 20:01
+"    Version: ndoo.js(v0.3.3beta)
+" LastChange: 06/25/2013 17:21
 " --------------------------------------------------
 */
 (function($) {
@@ -115,7 +115,7 @@
                 run('start');
                 return void 0;
               }).find('li').bind('mouseenter', function() {
-                step('set', false, $(this).index());
+                step('set', true, $(this).index());
                 return void 0;
               });
             } else if (config.type === 'click') {
@@ -148,7 +148,7 @@
         tabContent = "<div class='tabContent' style='width:" + width + "px; height:" + height + "px;'></div>";
         beforeOffset = offset[3] || offset[0];
         if (beforeOffset) {
-          beforeRepeat = count - Math.ceil(beforeOffset / config.width) - 1;
+          beforeRepeat = count - Math.ceil(beforeOffset / config.width) - config.single;
           $beforeEl = $content.find("li:gt(" + beforeRepeat + ")").clone();
           loopstart = beforeOffset - $beforeEl.length * (config.effect === 'slideV' ? config.height : config.width);
           beforeoffset = $beforeEl.length;
@@ -158,7 +158,7 @@
         }
         afterOffset = offset[1] || offset[2];
         if (afterOffset) {
-          afterRepeat = Math.ceil(afterOffset / config.width) + count % config.move + 1;
+          afterRepeat = Math.ceil(afterOffset / config.width) + count % config.move + config.single;
           $afterEl = $self.find("li:lt(" + afterRepeat + ")").clone();
         } else if (!beforeOffset && config.loop) {
           $afterEl = $self.find("li:lt(1)").clone();
@@ -248,7 +248,7 @@
                 if (overflow < 0) {
                   current += count;
                   tomargin = loopstart + current * (config.effect === 'slideV' ? config.height : config.width);
-                  $content.css(animateName, tomargin);
+                  $content.stop(true).css(animateName, tomargin);
                   if (callback) {
                     callback('reset', current);
                   }
@@ -276,7 +276,7 @@
               if (config.loop) {
                 current -= count;
                 tomargin = loopstart + current * (config.effect === 'slideV' ? config.height : config.width);
-                $content.css(animateName, tomargin);
+                $content.stop(true).css(animateName, tomargin);
                 if (callback) {
                   callback('reset', current);
                 }
@@ -291,7 +291,7 @@
           }
           config.current = current;
           animate[animateName] = tomargin;
-          $content.stop(true, true).animate(animate, config.duration, config.easing, function() {
+          $content.stop(true).animate(animate, config.duration, config.easing, function() {
             if (callback) {
               callback('effectover', current);
             }
@@ -327,9 +327,9 @@
           }
           config.current = current;
           if (e === 'default') {
-            $content.find('li').stop(true, true).hide();
+            $content.find('li').stop(true).hide();
           } else if (e === 'out') {
-            $content.find('li').stop(true, true).css('z-index', 1).eq(beforeoffset - prev).css('z-index', 2).end().eq(beforeoffset - current).hide().css('z-index', 3);
+            $content.find('li').stop(true).css('z-index', 1).eq(beforeoffset - prev).css('z-index', 2).end().eq(beforeoffset - current).hide().css('z-index', 3);
           }
           if (useEffect) {
             $content.find("li:eq(" + (beforeoffset - config.current) + ")").fadeIn(config.duration, config.easing, function() {

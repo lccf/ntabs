@@ -5,7 +5,7 @@
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
 "    Version: ndoo.js(v0.3.3beta)
-" LastChange: 06/13/2013 13:41
+" LastChange: 06/25/2013 17:21
 " --------------------------------------------------
 ###
 (($)->
@@ -107,7 +107,7 @@
                 run 'start'
                 undefined
               .find('li').bind 'mouseenter', ->
-                step 'set', false, $(@).index()
+                step 'set', true, $(@).index()
                 undefined
 
             else if config.type is 'click'
@@ -259,7 +259,8 @@
                   current += count
                   tomargin = loopstart + current * if config.effect is 'slideV' then config.height else config.width
                   # console.log "reset!!! animateName: #{animateName} tomargin: #{tomargin}"
-                  $content.css animateName, tomargin
+                  $content.stop(true)
+                  .css animateName, tomargin
                   callback('reset', current) if callback
               # 未开启循环，直接重置
               else
@@ -292,7 +293,8 @@
               if config.loop
                 current -= count
                 tomargin = loopstart + current * if config.effect is 'slideV' then config.height else config.width
-                $content.css animateName, tomargin
+                $content.stop(true)
+                .css animateName, tomargin
                 # console.log "reset!!! animateName: #{animateName} tomargin: #{tomargin}"
                 callback('reset', current) if callback
 
