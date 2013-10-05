@@ -5,7 +5,7 @@
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
 "    Version: ndoo.js(v0.3.3beta)
-" LastChange: 06/25/2013 17:21
+" LastChange: 10/06/2013 01:27
 " --------------------------------------------------
 ###
 (($)->
@@ -27,6 +27,7 @@
         width     : 470           # 宽
         height    : 150           # 高
         single    : 0             # 显示个数
+        setsize   : 0             # 设置宽高
         easing    : "swing"       # 擦除效果
         move      : 1             # 移动位数
         loop      : false         # 是否循环滚动
@@ -137,6 +138,7 @@
         offset = config.offset
 
         tabContent = "<div class='tabContent' style='width:#{width}px; height:#{height}px;'></div>"
+        $content.wrap tabContent
 
         # 前重复
         beforeOffset = offset[3] || offset[0]
@@ -167,7 +169,10 @@
           #width: config.width
           #height: config.height
 
-        $content.wrap tabContent
+        if config.setsize & 1
+          $content.find('li').css 'width', width+'px'
+        if config.setsize & 2
+          $content.find('li').css 'height', height+'px'
 
         # 悬停
         if config.type is 'auto' or config.type is 'autoclick'
@@ -385,14 +390,14 @@
         # 强制停止判断
         ###
         if not ctrl and type isnt 'set' and config.stop
-          return;
+          return
         ###
 
         if type is 'set'
           if count - index is 1
             index = index - config.single + 1
           if index == config.current
-            return;
+            return
           else if index > config.current
             type = 'next'
             config.current = 0 - index + 1
@@ -452,7 +457,7 @@
       # 初始化
       init = ->
         if not $self.length
-          return;
+          return
 
         initNav()
         initLabel()
