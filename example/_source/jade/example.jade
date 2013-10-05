@@ -175,8 +175,8 @@ block pageContent
       |  }
       |  return void 0;
       |})();
-      | 停止: horizontalTab2.ctrl('stop')
-      | 开始: horizontalTab2.ctrl('start')
+      | 停止: horizontalTab2.ctrl.stop()
+      | 开始: horizontalTab2.ctrl.start()
       
     p 效果:
     .example_box
@@ -188,8 +188,8 @@ block pageContent
           li: a(href="#"): img(src="pic/3.watermark.jpg")
           li: a(href="#"): img(src="pic/4.watermark.jpg")
       div.Lmt20.Ltac
-        button(onclick="horizontalTab2.ctrl('stop')") 停止
-        button(onclick="horizontalTab2.ctrl('start')") 运行
+        button(onclick="horizontalTab2.ctrl.stop()") 停止
+        button(onclick="horizontalTab2.ctrl.start()") 运行
     // }}}
 
     .Lmt40 &nbsp;
