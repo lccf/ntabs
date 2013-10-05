@@ -12,6 +12,7 @@
     "sass": {
       "command": [
         "sass --style compact sass/#{$fileName}.sass ../css/#{$fileName}.css"
+        , "sed -i -e '/@charset/d' ../css/#{$fileName}.css"
          /* , "cp -fp ../css/#{$fileName}.css ../../public/css" */
       ]
     }
