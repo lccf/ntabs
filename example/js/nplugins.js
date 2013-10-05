@@ -5,7 +5,7 @@
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
 "    Version: ndoo.js(v0.3.3beta)
-" LastChange: 06/25/2013 17:21
+" LastChange: 10/06/2013 01:27
 " --------------------------------------------------
 */
 (function($) {
@@ -13,8 +13,10 @@
 
   _n = this;
   tabs_new = (function($) {
-    return function(option, callback) {
-      var $content, $self, beforeoffset, config, count, ctrl, ctrllock, effect, init, initLabel, initNav, initState, initTabCon, initTabContent, loopstart, run, setLabel, setTabCon, step, tick;
+    var ntabs;
+
+    return ntabs = function(option, callback) {
+      var $content, $self, beforeoffset, config, contentBack, count, ctrl, ctrllock, destroy, effect, getconfig, init, initLabel, initNav, initState, initTabCon, initTabContent, loopstart, reinit, run, setLabel, setTabCon, start, step, stop, tick;
 
       config = {
         current: 0,
@@ -28,6 +30,7 @@
         width: 470,
         height: 150,
         single: 0,
+        setsize: 0,
         easing: "swing",
         move: 1,
         loop: false,
@@ -44,6 +47,7 @@
       }
       $self = this;
       $content = $self.find(config.content);
+      contentBack = $self.html();
       tick = -1;
       ctrllock = false;
       count = $content.find('>li').length;
@@ -146,6 +150,7 @@
         height = config.height + config.offset[0] + config.offset[2];
         offset = config.offset;
         tabContent = "<div class='tabContent' style='width:" + width + "px; height:" + height + "px;'></div>";
+        $content.wrap(tabContent);
         beforeOffset = offset[3] || offset[0];
         if (beforeOffset) {
           beforeRepeat = count - Math.ceil(beforeOffset / config.width) - config.single;
@@ -155,6 +160,7 @@
         } else if (!beforeOffset && config.loop) {
           $beforeEl = $content.find("li:gt(" + (count - 2) + ")").clone();
           loopstart = 0 - (config.effect === 'slideV' ? config.height : config.width);
+          beforeoffset = $beforeEl.length;
         }
         afterOffset = offset[1] || offset[2];
         if (afterOffset) {
@@ -169,7 +175,12 @@
         if ($afterEl) {
           $afterEl.appendTo($content);
         }
-        $content.wrap(tabContent);
+        if (config.setsize & 1) {
+          $content.find('li').css('width', width + 'px');
+        }
+        if (config.setsize & 2) {
+          $content.find('li').css('height', height + 'px');
+        }
         if (config.type === 'auto' || config.type === 'autoclick') {
           $content.hover(function() {
             run('stop');
@@ -372,7 +383,7 @@
         }
         /*
         if not ctrl and type isnt 'set' and config.stop
-          return;
+          return
         */
 
         if (type === 'set') {
@@ -430,7 +441,10 @@
         }
         return void 0;
       };
-      ctrl = function(type) {
+      ctrl = function(type, param) {
+        if (param == null) {
+          param = null;
+        }
         if (type === 'stop' && tick !== -1) {
           ctrllock = true;
           run(type);
@@ -440,6 +454,38 @@
           return run(type);
         }
       };
+      start = function() {
+        return ctrl('start');
+      };
+      stop = function() {
+        return ctrl('stop');
+      };
+      getconfig = function() {
+        return config;
+      };
+      destroy = function() {
+        run('stop');
+        $self.html(contentBack);
+        return $self.ctrl = null;
+      };
+      reinit = function(option, call) {
+        if (option == null) {
+          option = {};
+        }
+        destroy();
+        if (call) {
+          callback = call;
+        }
+        config = $.extend(config, option);
+        return ntabs.call($self, $.extend(config, option), callback);
+      };
+      $.extend(ctrl, {
+        start: start,
+        stop: stop,
+        getconfig: getconfig,
+        destroy: destroy,
+        reinit: reinit
+      });
       init = function() {
         if (!$self.length) {
           return;

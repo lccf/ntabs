@@ -4,7 +4,7 @@
 "       Desc: 插件adapter模块
 "     Author: chenglf
 "      Email: chenglf@ndoo.net
-"    Version: ndoo.js(v0.3.2beta)
+"    Version: ndoo.js(v0.3.3beta)
 " LastChange: 05/16/2013 20:01
 " --------------------------------------------------
 ###
