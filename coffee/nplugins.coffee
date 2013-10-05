@@ -14,7 +14,7 @@
   # tabs_new {{{
   tabs_new = (($)->
 
-    (option, callback)->
+    ntabs = (option, callback)->
       config =
         current   : 0             # 初始化位置
         type      : "click"       # 动画触发类型
@@ -43,6 +43,7 @@
 
       $self     = @
       $content  = $self.find config.content
+      contentBack = $self.html()
 
       tick      = -1 #计时器变量
       ctrllock  = false #操作锁
@@ -152,6 +153,8 @@
         else if not beforeOffset and config.loop
           $beforeEl = $content.find("li:gt(#{count-2})").clone()
           loopstart = 0 - if config.effect is 'slideV' then config.height else config.width
+          # 暂存前缀
+          beforeoffset = $beforeEl.length
 
         # 后重复
         afterOffset = offset[1] || offset[2]
@@ -444,15 +447,46 @@
             tick = setInterval step, config.pause
 
         undefined
-
-      ctrl = (type)->
+      # ctrl {{{
+      ctrl = (type, param=null)->
         if type is 'stop' and tick isnt -1
           ctrllock = true
           run type
 
-        if  type is 'start' and tick is -1
+        if type is 'start' and tick is -1
           ctrllock = false
           run type
+
+      start = ->
+        ctrl 'start'
+
+      stop = ->
+        ctrl 'stop'
+
+      getconfig = ->
+        config
+
+      destroy = ->
+        run 'stop'
+        $self.html contentBack
+        $self.ctrl = null
+
+      reinit = (option = {}, call)->
+        destroy()
+
+        callback = call if call
+        config = $.extend config, option
+
+        ntabs.call $self, $.extend(config, option), callback
+
+      # 增强的控制方法
+      $.extend ctrl,
+        start     : start
+        stop      : stop
+        getconfig : getconfig
+        destroy   : destroy
+        reinit    : reinit
+      # }}}
 
       # 初始化
       init = ->
