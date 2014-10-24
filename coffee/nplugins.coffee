@@ -37,6 +37,7 @@
         reverse   : false         # 是否反转运动方向
         label     : false         # 是否显示标题
         ctrl      : false         # 是否返回控制函数
+        hover     : true          # 悬停是否停止动画
 
       config    = $.extend config, option
       config.current = 0 - config.current if config.current > 0
@@ -151,8 +152,8 @@
           # 暂存前缀
           beforeoffset = $beforeEl.length
         else if not beforeOffset and config.loop
-          $beforeEl = $content.find("li:gt(#{count-2})").clone()
-          loopstart = 0 - if config.effect is 'slideV' then config.height else config.width
+          $beforeEl = $content.find("li:gt(#{count - config.single})").clone()
+          loopstart = 0 - (if config.effect is 'slideV' then config.height else config.width) * $beforeEl.length
           # 暂存前缀
           beforeoffset = $beforeEl.length
 
@@ -162,7 +163,7 @@
           afterRepeat = Math.ceil(afterOffset / config.width) + count % config.move + config.single
           $afterEl = $self.find("li:lt(#{afterRepeat})").clone()
         else if not beforeOffset and config.loop
-          $afterEl = $self.find("li:lt(1)").clone()
+          $afterEl = $self.find("li:lt(#{config.single})").clone()
 
         # 应用重复
         $beforeEl.prependTo($content) if $beforeEl
@@ -178,7 +179,7 @@
           $content.find('li').css 'height', height+'px'
 
         # 悬停
-        if config.type is 'auto' or config.type is 'autoclick'
+        if config.hover and (config.type is 'auto' or config.type is 'autoclick')
           $content.hover ->
             run 'stop'
             undefined

@@ -7,17 +7,14 @@
 "    Version: ndoo.js(v0.3.3beta)
 " LastChange: 10/06/2013 01:27
 " --------------------------------------------------
-*/
+ */
 (function($) {
   var tabs_new, _n;
-
   _n = this;
   tabs_new = (function($) {
     var ntabs;
-
     return ntabs = function(option, callback) {
       var $content, $self, beforeoffset, config, contentBack, count, ctrl, ctrllock, destroy, effect, getconfig, init, initLabel, initNav, initState, initTabCon, initTabContent, loopstart, reinit, run, setLabel, setTabCon, start, step, stop, tick;
-
       config = {
         current: 0,
         type: "click",
@@ -39,7 +36,8 @@
         tabConCtl: true,
         reverse: false,
         label: false,
-        ctrl: false
+        ctrl: false,
+        hover: true
       };
       config = $.extend(config, option);
       if (config.current > 0) {
@@ -55,7 +53,6 @@
       beforeoffset = 0;
       initNav = function() {
         var $nav;
-
         if (config.nav) {
           $nav = $('<a href="javascript:;" class="prev"></a><a href="javascript:;" class="next"></a>').appendTo($self);
           $nav.click(function() {
@@ -80,7 +77,6 @@
       };
       initLabel = function() {
         var $label;
-
         if (config.label) {
           $label = $('<div class="tabLabel"></div>').appendTo($self);
           if (config.type === 'auto' || config.type === 'autoclick') {
@@ -97,7 +93,6 @@
       };
       initTabCon = function() {
         var $tabCon, len, tabCon;
-
         if (config.tabCon) {
           $tabCon = $self.find('.tabCon');
           if (!$tabCon.length) {
@@ -145,7 +140,6 @@
       };
       initTabContent = function() {
         var $afterEl, $beforeEl, afterOffset, afterRepeat, beforeOffset, beforeRepeat, height, offset, tabContent, width;
-
         width = config.width * config.single + config.offset[1] + config.offset[3];
         height = config.height + config.offset[0] + config.offset[2];
         offset = config.offset;
@@ -158,8 +152,8 @@
           loopstart = beforeOffset - $beforeEl.length * (config.effect === 'slideV' ? config.height : config.width);
           beforeoffset = $beforeEl.length;
         } else if (!beforeOffset && config.loop) {
-          $beforeEl = $content.find("li:gt(" + (count - 2) + ")").clone();
-          loopstart = 0 - (config.effect === 'slideV' ? config.height : config.width);
+          $beforeEl = $content.find("li:gt(" + (count - config.single) + ")").clone();
+          loopstart = 0 - (config.effect === 'slideV' ? config.height : config.width) * $beforeEl.length;
           beforeoffset = $beforeEl.length;
         }
         afterOffset = offset[1] || offset[2];
@@ -167,7 +161,7 @@
           afterRepeat = Math.ceil(afterOffset / config.width) + count % config.move + config.single;
           $afterEl = $self.find("li:lt(" + afterRepeat + ")").clone();
         } else if (!beforeOffset && config.loop) {
-          $afterEl = $self.find("li:lt(1)").clone();
+          $afterEl = $self.find("li:lt(" + config.single + ")").clone();
         }
         if ($beforeEl) {
           $beforeEl.prependTo($content);
@@ -181,7 +175,7 @@
         if (config.setsize & 2) {
           $content.find('li').css('height', height + 'px');
         }
-        if (config.type === 'auto' || config.type === 'autoclick') {
+        if (config.hover && (config.type === 'auto' || config.type === 'autoclick')) {
           $content.hover(function() {
             run('stop');
             return void 0;
@@ -194,7 +188,6 @@
       };
       initState = function() {
         var $elem, target, text, url;
-
         if (config.effect === 'slideV') {
           $content.css({
             'height': config.height * ($content.find('li').length + 2),
@@ -222,7 +215,6 @@
       };
       setTabCon = function(curr) {
         var $li;
-
         $li = $self.find(".tabCon li").removeClass(config.active);
         if (curr + config.single > count) {
           $li.slice(curr).addClass(config.active);
@@ -234,7 +226,6 @@
       };
       setLabel = function(text, url, target) {
         var $label;
-
         $label = $self.find('.tabLabel');
         $label.html("<a href='" + (url || 'javascript:;') + "' target='" + (target || '') + "'>" + text + "</a>");
         return void 0;
@@ -242,7 +233,6 @@
       effect = {
         _slide: function(origin, type) {
           var animate, animateName, current, overflow, tomargin;
-
           animate = {};
           current = config.current;
           animateName = 'marginLeft';
@@ -320,7 +310,6 @@
         },
         _fade: function(e, type, useEffect) {
           var current, prev;
-
           if (useEffect == null) {
             useEffect = true;
           }
@@ -374,18 +363,17 @@
       };
       step = function(type, ctrl, index) {
         var $elem, result, text, url;
-
         if (type == null) {
           type = "next";
         }
         if (ctrl == null) {
           ctrl = false;
         }
+
         /*
         if not ctrl and type isnt 'set' and config.stop
           return
-        */
-
+         */
         if (type === 'set') {
           if (count - index === 1) {
             index = index - config.single + 1;
